@@ -1,17 +1,25 @@
 name: "My first github action"
 
+# when run code
+# one file one event
+# 여러 개 이벤트가 같은 파일에 있을 경우 다른 시점에 실행되어야 하면 다른 방법으로 ...
 on: push
+
+#옛날엔 깃헙액션이 free였는데 누가 채굴을 해버리는 바람에... 이하생략
 
 jobs:
   first-job:
     name: "first job"
 
+    # os (windows, macos, ubuntu)(-lastest 로 가장 최신 os사용 가능)
     runs-on: ubuntu-latest
 
     steps:
       - name: mask value
         id: first
         shell: bash
+        # key가 my_first_value, value가 first_value. 두번째에서 참조함
+
         run: |
           first_value="This is the first output value"
 
@@ -20,6 +28,8 @@ jobs:
 
       - name: get output value
         shell: bash
+        # 위에서 부여한 id로 환경변수를 찾는다.
+
         run: |
           echo ${{ steps.first.outputs.my_first_value }}
           echo "SECRET: ${{ secrets.HELLO }}"
