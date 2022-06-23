@@ -5,6 +5,7 @@ name: "My first github action"
 on:
   push:
     branches: -main
+      -matrix
     tags: -'v*'
   pull_request:
     branches: -main
