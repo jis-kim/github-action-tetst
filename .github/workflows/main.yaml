@@ -1,23 +1,23 @@
-name: 'My first github action'
+name: "My first github action"
 
 on: push
 
 jobs:
   first-job:
-    name: 'first job'
+    name: "first job"
 
     runs-on: ubuntu-latest
 
     steps:
-    - name: set output value
-      id: first
-      shell: bash
-      run: |
-        first_value="This is the first output value"
+      - name: set output value
+        id: first
+        shell: bash
+        run: |
+          first_value="This is the first output value"
 
-        echo "::set-output name=my_first_value::$first_value"
+          echo "::set-output name=my_first_value::$first_value"
 
-    - name: get output value
-      shell: bash
-      run: |
-        echo ${{ steps.first.outputs.my_first_value }}
+      - name: get output value
+        shell: bash
+        run: |
+          echo ${{ steps.first.outputs.my_first_value }}
