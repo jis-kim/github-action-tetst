@@ -1,4 +1,4 @@
-name: "My first github action"
+name: 'My first github action'
 
 # when run code
 # one file one event
@@ -10,10 +10,8 @@ on: push
 jobs:
   first-job:
     name: "first job"
-
     # os (windows, macos, ubuntu)(-lastest 로 가장 최신 os사용 가능)
     runs-on: ubuntu-latest
-
     steps:
       -name: set output value
       id: first
