@@ -7,24 +7,37 @@ on: ["push", "pull_request"]
 jobs:
   first-job:
     name: "first job"
+    if: github-eventname:
+    # 세 os에서 동시에 돌아간다. 앗 놓쳤는데 지우시네 ㅎㅎ
+    #strategy:
+    #  matrix:
+    #    os: ["windows-latest", "macos-latest", "ubuntu-latest"]
+    #    nodejs: ["14.x", "16.x"]
 
-    # 세 os에서 동시에 돌아간다.
-    strategy:
-      matrix:
-        os: ["windows-latest", "macos-latest", "ubuntu-latest"]
-        nodejs: ["14.x", "16.x"]
+    runs-on: ubuntu-latest
 
-    runs-on: ${{ matrix.os }}
+  # if로 작동 시점을 정할 수 있다.
+  # step, job에 걸 수 있다.
+  # 특정 task가 mac에서만 돌아가는 경우라던지..에 쓸 수 있다.
+    steps:
+    - name: output value 1
+      shell: bash
+      run: |
+        echo "Hello World"
+    - name: output value 2
+      if: github.event_name == 'pull_request'
+      shell: bash
+      run: |
+        echo "Hello World"
+
+  second-job:
+    name: 'second job'
+    if: github.event_name == 'pull_request'
+
+    runs-on: ubuntu-latest
 
     steps:
-      - name: Setup node.js
-        uses: actions/setup-node@v3
-        with:
-          node-version: ${{ matrix.nodejs }}
-
-      - name: output value from ${{ matrix.os }}
-        id: first
-        shell: bash
-        run: |
-          echo "OS: ${{ matrix.os }}"
-          echo "node.js: ${{ matrix.nodejs }}"
+    - name: output value
+      shell: bash
+      run: |
+        echo "Hello World"
