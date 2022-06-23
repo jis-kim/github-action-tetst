@@ -2,8 +2,17 @@ name: "My first github action"
 
 # 특정 job은 push에만 돌고 pull에는 돌지 말라고 할 수 있다.
 # 하지만 멘토님 개인적으로 추천하지 않음.
-on: ["push", "pull_request"]
+on:
+  push:
+    branches: -main
+    tags: -'v*'
+  pull_request:
+    branches: -main
+      -matrix
 
+# api download -> build -> ...
+# jdk라던지 npm이라던지 ... 해서 build할 때 까지가 build
+# 셋업, 압축.. 등등 해서 release
 jobs:
   first-job:
     name: "first job"
