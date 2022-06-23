@@ -10,8 +10,10 @@ on: push
 jobs:
   first-job:
     name: "first job"
+
     # os (windows, macos, ubuntu)(-lastest 로 가장 최신 os사용 가능)
     runs-on: ubuntu-latest
+
     steps:
       -name: set output value
       id: first
@@ -19,6 +21,7 @@ jobs:
       # key가 my_first_value, value가 first_value. 두번째에서 참조함
       run: |
         first_value="This is the first output value"
+
         echo "::set-output name=my_first_value::$first_value"
 
       -name: get output value
