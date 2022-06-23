@@ -31,7 +31,20 @@ jobs:
 
   second-job:
     name: "second job"
+    needs: first-job
+
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: output value
+        shell: bash
+        run: |
+          echo "Hello World"
+
+ third-job:
+    name: "third job"
     if: github.event_name == 'pull_request'
+    needs: second-job
 
     runs-on: ubuntu-latest
 
